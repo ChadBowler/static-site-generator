@@ -22,7 +22,7 @@ class HTMLNode:
  
 # Class LeafNode inherits HTMLNode
 class LeafNode(HTMLNode):
-    def __init__(self, tag, value, props):
+    def __init__(self, tag=None, value=None, props=None):
         super().__init__(tag, value, children=None, props=props)
 
     def to_html(self):
@@ -37,3 +37,23 @@ class LeafNode(HTMLNode):
 
     def __repr__(self):
         return f"LeafNode({self.tag}, {self.value}, {self.props})"
+
+# Class ParentNode inherits HTMLNode    
+class ParentNode(HTMLNode):
+    def __init__(self, tag=None, children=None, props=None):
+        super().__init__(tag, value=None, children=children, props=props)
+
+    def to_html(self):
+        if self.tag is None:
+            raise ValueError("Invalid HTML: Parent node must have a tag")
+        if self.children is None:
+            raise ValueError("Invalid HTML: Parent node must have children")
+        node_string = f"<{self.tag}{self.props_to_html()}>"
+        for child in self.children:
+            if child.children is None:
+                node_string += LeafNode(child.tag, child.value, child.props).to_html()
+            else:
+                node_string += ParentNode(child.tag, child.children, child.props).to_html()
+        node_string += f"</{self.tag}>"
+        return node_string
+    
