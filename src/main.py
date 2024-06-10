@@ -1,11 +1,7 @@
-from textnode import TextNode
+from copy_static import clear_public
 
 def main():
-    text = "This is a text node"
-    text_type = "bold"
-    url = "https://www.google.com"
-    new_node = TextNode(text, text_type, url)
-    print(new_node)
+    clear_public()
 
 
 if __name__ == "__main__":
