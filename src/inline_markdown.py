@@ -5,18 +5,9 @@ from textnode import (
     ITALIC,
     CODE,
     LINK,
-    IMAGE,
-    delimiters
+    IMAGE
 )
-
-def find_delimiter(node):
-    keys = []
-    values = []
-    for key in delimiters.keys():
-        if key in node.text:
-            keys.append(key)
-            values.append(delimiters[key])
-    return (keys, values)
+from extract_links import split_nodes_image, split_nodes_link
 
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
     new_nodes = []
@@ -37,4 +28,13 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
                 split_nodes.append(TextNode(sections[i], text_type))
         new_nodes.extend(split_nodes)
     return new_nodes
+
+def text_to_textnodes(text):
+    nodes = [TextNode(text, TEXT)]
+    nodes = split_nodes_delimiter(nodes, "**", BOLD)
+    nodes = split_nodes_delimiter(nodes, "*", ITALIC)
+    nodes = split_nodes_delimiter(nodes, "`", CODE)
+    nodes = split_nodes_image(nodes)
+    nodes = split_nodes_link(nodes)
+    return nodes
 

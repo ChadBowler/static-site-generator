@@ -10,7 +10,7 @@ from textnode import (
     IMAGE,
     delimiters
 )
-from inline_markdown import split_nodes_delimiter
+from inline_markdown import split_nodes_delimiter, text_to_textnodes
 
 
 class TestTextNode(unittest.TestCase):
@@ -45,6 +45,22 @@ class TestTextNode(unittest.TestCase):
         ]
         self.assertEqual(new_nodes, test_nodes)          
 
+    def test_text_to_textnode(self):
+        text = "This is **text** with an *italic* word and a `code block` and an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and a [link](https://boot.dev)"
+        new_nodes = text_to_textnodes(text)
+        test_nodes = [
+                        TextNode("This is ", TEXT),
+                        TextNode("text", BOLD),
+                        TextNode(" with an ", TEXT),
+                        TextNode("italic", ITALIC),
+                        TextNode(" word and a ", TEXT),
+                        TextNode("code block", CODE),
+                        TextNode(" and an ", TEXT),
+                        TextNode("image", IMAGE, "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png"),
+                        TextNode(" and a ", TEXT),
+                        TextNode("link", LINK, "https://boot.dev"),
+                    ]
+        self.assertEqual(new_nodes, test_nodes)
 
 if __name__ == "__main__":
     unittest.main()

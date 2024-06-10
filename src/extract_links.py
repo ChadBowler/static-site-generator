@@ -7,7 +7,6 @@ from textnode import (
     CODE,
     LINK,
     IMAGE,
-    delimiters
 )
 
 def extract_markdown_images(text):
@@ -64,17 +63,3 @@ def split_nodes_link(old_nodes):
                 split_nodes.append(TextNode(old_node.text, TEXT))
         new_nodes.extend(split_nodes)
     return new_nodes
-
-# node = TextNode(
-#     "This is text with an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and another ![second image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/3elNhQu.png)",
-#     TEXT,
-# )
-# new_nodes = split_nodes_image([node])
-# print(new_nodes)
-
-# node = TextNode(
-#     "This is text with a [link](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and another [second link](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/3elNhQu.png) with some extra text at the end.",
-#     TEXT,
-# )
-# new_nodes = split_nodes_link([node])
-# print(new_nodes)
