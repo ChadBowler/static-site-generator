@@ -29,8 +29,8 @@ class TestTextNode(unittest.TestCase):
         leaf_node = text_node_to_html_node(node)
         html_node = "<b>This is a text node</b>"
         link_html = '<a href="https://www.google.com">To Google</a>'
-        self.assertEqual(leaf_node, html_node)
-        self.assertEqual(link_node, link_html)
+        self.assertEqual(leaf_node.to_html(), html_node)
+        self.assertEqual(link_node.to_html(), link_html)
 
 
 if __name__ == "__main__":
