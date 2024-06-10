@@ -8,7 +8,6 @@ from textnode import (
     CODE,
     LINK,
     IMAGE,
-    delimiters
 )
 from inline_markdown import split_nodes_delimiter, text_to_textnodes
 
