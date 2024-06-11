@@ -1,0 +1,24 @@
+# This is a header
+
+This is a **bolded** paragraph
+
+This is another paragraph with *italic* text and `code` here
+This is the same paragraph on a new line
+
+```
+This is a code block
+with more code
+```
+
+>This is a quote block
+>Second line of **quote** block
+>Let's do 3 lines
+
+>This is a pseudo quote block
+Because the *second line* doesn't start with a >
+
+1. This is an ordered list
+2. It should say so in the block type function
+
+* This is a list
+* with items

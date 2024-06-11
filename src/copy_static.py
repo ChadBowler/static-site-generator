@@ -2,17 +2,17 @@ import os
 import shutil
 import re
 
-public_dir = "../public"
-static_dir = "../../static"
+public_dir = "./public"
+static_dir = "../static"
 MODE=0o700
 file_pattern = re.compile(r"[a-zA-Z0-9]+\.[a-z]{,4}")
 
 def clear_public():
     if os.path.exists(public_dir):
         shutil.rmtree(public_dir)
-        os.mkdir(public_dir, mode=MODE)
+        os.mkdir(public_dir)
     else:
-        os.mkdir(public_dir, mode=MODE)
+        os.mkdir(public_dir)
     copy_dir(static_dir, public_dir)
     print("Done")
 
@@ -31,7 +31,7 @@ def copy_dir(source_dir, dest_dir):
             shutil.copy(os.path.join(source_dir, file), dest_dir)
     for folder in directories:
         if folder not in to_dir_list:
-            os.mkdir(os.path.join(dest_dir, folder), mode=MODE)
+            os.mkdir(os.path.join(dest_dir, folder))
             return copy_dir(os.path.join(source_dir, folder), os.path.join(dest_dir, folder))
     if source_dir == static_dir and dest_dir == public_dir:
         return
